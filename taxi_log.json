@@ -1,0 +1,32 @@
+{
+    "service_history": {},
+    "services_failed": {
+        "num": 0
+    },
+    "2": {
+        "taxi_id": "2",
+        "x_pos": 5,
+        "y_pos": 1,
+        "speed": 3,
+        "services_aviable": "3",
+        "position_history": [
+            [
+                5,
+                1
+            ]
+        ]
+    },
+    "1": {
+        "taxi_id": "1",
+        "x_pos": 2,
+        "y_pos": 3,
+        "speed": 2,
+        "services_aviable": "3",
+        "position_history": [
+            [
+                2,
+                3
+            ]
+        ]
+    }
+}
