@@ -12,7 +12,7 @@ def display_grid(x_pos, y_pos, sizeN, sizeM):
             if i == x_pos and j == y_pos:
                 row += "[  T  ]"
             else:
-                row += "[     ]"  # Empty cell
+                row += "[     ]"
         print(row)
 
 def send_position(pub_socket, taxi_id, x_pos, y_pos):
@@ -21,15 +21,15 @@ def send_position(pub_socket, taxi_id, x_pos, y_pos):
     print(f"Taxi {taxi_id} ha enviado su posición actual: ({x_pos}, {y_pos})")
 
 def countdown_thread(countdown_flag, speed,pub_socket, taxi_id, sizeN, sizeM):
-    global x_pos, y_pos # Variables globales para actualizar la posición
-    while True: # Bucle infinito para la cuenta regresiva
+    global x_pos, y_pos
+    while True:
         countdown_time = speed
-        while countdown_time > 0 and countdown_flag.is_set():  # Si aun hay tiempo y la bandera esta arriba sigue
-            print(f"Cuenta regresiva para enviar actualización: {countdown_time} segundos", end="\r") # Imprimir el tiempo restante
+        while countdown_time > 0 and countdown_flag.is_set():
+            print(f"Cuenta regresiva para enviar actualización: {countdown_time} segundos", end="\r")
             time.sleep(1)
-            countdown_time -= 1 #Se le resta uno a la cuenta
+            countdown_time -= 1
 
-        if countdown_flag.is_set():  # Cuando la cuenta termina, actualizar la posición
+        if countdown_flag.is_set():
             x_pos = (x_pos + 1) % sizeN
             y_pos = (y_pos + 1) % sizeM
             display_grid(x_pos, y_pos, sizeN, sizeM)

@@ -140,7 +140,7 @@ context = zmq.Context()
 # Patrón PUB/SUB para recibir actualizaciones de taxis
 sub_socket = context.socket(zmq.SUB)
 sub_socket.bind("tcp://*:5550")
-sub_socket.setsockopt_string(zmq.SUBSCRIBE, "")  # Escuchar todos los mensajes
+sub_socket.setsockopt_string(zmq.SUBSCRIBE, "")
 
 # Patrón PUB para asignar servicios
 pub_socket = context.socket(zmq.PUB)
