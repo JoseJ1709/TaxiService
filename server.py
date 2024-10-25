@@ -128,7 +128,7 @@ def open_display_terminal():
 def handle_positions():
     while True:
         message = sub_socket.recv_string()
-        prefix, data = message.split(':')
+        prefix, data = message.split(':',1)
         if prefix == "ins":
             save_taxi(data)
         elif prefix == "mov":
@@ -137,14 +137,13 @@ def handle_positions():
 
 context = zmq.Context()
 
-# Patrón PUB/SUB para recibir actualizaciones de taxis
 sub_socket = context.socket(zmq.SUB)
-sub_socket.bind("tcp://*:5550")
+sub_socket.connect("tcp://localhost:5051")
 sub_socket.setsockopt_string(zmq.SUBSCRIBE, "")
 
-# Patrón PUB para asignar servicios
+# Publish service assignments to taxis (5051)
 pub_socket = context.socket(zmq.PUB)
-pub_socket.bind("tcp://*:5551")
+pub_socket.connect("tcp://localhost:5050")
 
 # Patrón REQ/REP para recibir solicitudes de usuarios
 rep_socket = context.socket(zmq.REP)

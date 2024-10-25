@@ -47,15 +47,15 @@ y_posH = y_pos
 
 context = zmq.Context()
 
-# Publicador (PUB) para enviar la posición del taxi al servidor
 pub_socket = context.socket(zmq.PUB)
-pub_socket.connect("tcp://localhost:5550")
-# Suscriptor (SUB) para recibir servicios asignados
-sub_socket = context.socket(zmq.SUB)
-sub_socket.connect("tcp://localhost:5551")
-sub_socket.setsockopt_string(zmq.SUBSCRIBE, str(taxi_id))
+pub_socket.connect("tcp://localhost:5050")
 
+# SUB socket to receive service assignments
+sub_socket = context.socket(zmq.SUB)
+sub_socket.connect("tcp://localhost:5051")
+sub_socket.setsockopt_string(zmq.SUBSCRIBE, str(taxi_id))
 print(f"Taxi {taxi_id} esperando por clientes...")
+
 time.sleep(1)
 try:
     taxi_data = f"ins:{taxi_id},{x_pos},{y_pos},{speed},{serv}"
